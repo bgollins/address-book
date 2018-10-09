@@ -21,20 +21,31 @@ $(document).ready(function(){
 
     var newContact = new Contact (inputFirstName,inputlastName,inputStreet, inputCity, inputState);
 
-    $("#contacts").show();
 
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.firstName + "</span></li>");
+
+    $("ul#contacts").append("<li><span class='contact'>" + newContact.firstName + " " + newContact.lastName + "</span></li>");
+/*
     $("ul#contacts").append("<li><span class='contact'>" + newContact.lastName + "</span></li>");
     $("ul#contacts").append("<li><span class='contact'>" + newContact.street + "</span></li>");
     $("ul#contacts").append("<li><span class='contact'>" + newContact.city + "</span></li>");
     $("ul#contacts").append("<li><span class='contact'>" + newContact.state + "</span></li>");
-/*
+debugger;
+*/
+    $("#contacts").show();
+
     $("input#firstName").val("");
     $("input#lastName").val("");
     $("input#street").val("");
     $("input#city").val("");
     $("input#state").val("");
-*/
+
+  });
+
+  $(".contact").last().click(function() {
+    $("#show-contact").show();
+    $("#show-contact h2").text(newContact.firstName);
+    $(".firstName").text(newContact.firstName);
+    $(".lastName").text(newContact.lastName);
 
   });
 });
