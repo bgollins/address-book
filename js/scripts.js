@@ -8,6 +8,10 @@ function Contact(first, last, street, city, state) {
   this.state = state;
 }
 
+Contact.prototype.fullName = function() {
+  return this.firstName + " " + this.lastName;
+}
+
 
 //UI Logic
 $(document).ready(function(){
@@ -21,16 +25,7 @@ $(document).ready(function(){
 
     var newContact = new Contact (inputFirstName,inputlastName,inputStreet, inputCity, inputState);
 
-
-
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.firstName + " " + newContact.lastName + "</span></li>");
-/*
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.lastName + "</span></li>");
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.street + "</span></li>");
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.city + "</span></li>");
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.state + "</span></li>");
-debugger;
-*/
+    $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
     $("#contacts").show();
 
     $("input#firstName").val("");
@@ -39,13 +34,14 @@ debugger;
     $("input#city").val("");
     $("input#state").val("");
 
-  });
-
-  $(".contact").last().click(function() {
-    $("#show-contact").show();
-    $("#show-contact h2").text(newContact.firstName);
-    $(".firstName").text(newContact.firstName);
-    $(".lastName").text(newContact.lastName);
-
+    $("#contacts").last().click(function() {
+      $("#show-contact").show();
+      $("#show-contact h3").text("First Name: " + newContact.fullName());
+      $(".firstName").text("First Name: " + newContact.firstName);
+      $(".lastName").text("Last Name: " + newContact.lastName);
+      $(".street").text("Street: " + newContact.street);
+      $(".city").text("City: " + newContact.city);
+      $(".state").text("State: " + newContact.state);
+    });
   });
 });
