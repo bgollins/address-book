@@ -16,6 +16,9 @@ Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 }
 
+Address.prototype.fullAddress = function() {
+  return this.street + ", " + this.city + " " + this.state;
+}
 
 //UI Logic
 $(document).ready(function(){
@@ -48,7 +51,7 @@ $(document).ready(function(){
       newContact.addresses.push(newAddress);
     });
     $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
-    
+
     $("#contacts").show();
 
     $(".contact").last().click(function() {
@@ -58,7 +61,7 @@ $(document).ready(function(){
       $(".lastName").text("Last Name: " + newContact.lastName);
       $("ul#addresses").text("");
       newContact.addresses.forEach(function(address) {
-        $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.state + "</li>");
+        $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
       });
     });
     $("input#firstName").val("");
