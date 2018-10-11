@@ -20,18 +20,26 @@ Address.prototype.fullAddress = function() {
   return this.street + ", " + this.city + " " + this.state;
 }
 
+function resetFields() {
+    $("input#firstName").val("");
+    $("input#lastName").val("");
+    $("input.new-street").val("");
+    $("input.new-city").val("");
+    $("input.new-state").val("");
+}
+
 //UI Logic
 $(document).ready(function(){
   $("#add-address").click(function() {
-    $("#new-address").append(
-      '<div class="new-addresses">' +
+    $("#new-addresses").append(
+      '<div class="new-address">' +
         '<div class="form-group">'+
-        '<p> <label for="street">Street</label>'+
-          '<input type="text" name="new-street" id="street"></input> </p>'+
-        '<p> <label for="city">City</label>'+
-          '<input type="text" name="new-city" id="city"></input> </p>'+
-        '<p> <label for="state">State</label>'+
-          '<input type="text" name="new-state" id="state"></input> </p>'+
+        '<p> <label for="new-street">Street</label>'+
+          '<input type="text" name="new-street" class="new-street"></input> </p>'+
+        '<p> <label for="new-city">City</label>'+
+          '<input type="text" name="new-city" class="new-city"></input> </p>'+
+        '<p> <label for="new-state">State</label>'+
+          '<input type="text" name="new-state" class="new-state"></input> </p>'+
         '</div>' +
       '</div>');
           });
@@ -43,12 +51,13 @@ $(document).ready(function(){
     var inputlastName = $("input#lastName").val();
     var newContact = new Contact (inputFirstName, inputlastName);
 
-    $("#new-address").each(function() {
-      var inputStreet = $(this).find("input#new-street").val();
-      var inputCity = $(this).find("input#new-city").val();
-      var inputState = $(this).find("input#new-state").val();
+    $(".new-address").each(function() {
+      var inputStreet = $(this).find("input.new-street").val();
+      var inputCity = $(this).find("input.new-city").val();
+      var inputState = $(this).find("input.new-state").val();
       var newAddress = new Address(inputStreet, inputCity, inputState);
       newContact.addresses.push(newAddress);
+      debugger;
     });
     $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
 
@@ -64,10 +73,6 @@ $(document).ready(function(){
         $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
       });
     });
-    $("input#firstName").val("");
-    $("input#lastName").val("");
-    $("input#new-street").val("");
-    $("input#new-city").val("");
-    $("input#new-state").val("");
+    resetFields();
   });
 });
